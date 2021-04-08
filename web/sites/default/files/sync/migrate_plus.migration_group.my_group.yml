@@ -1,0 +1,18 @@
+uuid: 8c507e65-a775-4b29-81a3-533c66946ac4
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - my_migrations
+id: my_group
+label: 'CSV to LB'
+description: 'Custom data migrations.'
+source_type: 'CSV Files'
+module: null
+shared_configuration:
+  source:
+    plugin: csv
+    delimiter: ','
+    enclosure: '"'
+    header_offset: 0

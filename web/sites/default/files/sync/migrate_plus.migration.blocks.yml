@@ -1,0 +1,45 @@
+uuid: 47c59a9d-a5db-4e4f-bf89-a6408e18a61d
+langcode: en
+status: true
+dependencies: {  }
+id: blocks
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: my_group
+label: 'Basic page bodies'
+source:
+  plugin: csv
+  path: /var/www/html/source_data/blocks.csv
+  fields:
+    -
+      name: entity_id
+      label: 'Entity ID'
+    -
+      name: delta
+      label: Delta
+    -
+      name: title
+      label: Title
+    -
+      name: body
+      label: 'Block body'
+  ids:
+    - entity_id
+    - delta
+  constants:
+    default_title: 'Page Body Field'
+process:
+  body/value: body
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+  info: title
+  reusable:
+    plugin: default_value
+    default_value: 0
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: basic
+migration_dependencies: null

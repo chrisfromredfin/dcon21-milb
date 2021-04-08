@@ -1,0 +1,13 @@
+auto_import:
+  -
+    filename: /var/www/html/web/modules/custom/my_migrations/config/install/migrate_plus.migration_group.my_group.yml
+    hash: ''
+  -
+    filename: /var/www/html/web/modules/custom/my_migrations/config/install/migrate_plus.migration.blocks.yml
+    hash: ''
+  -
+    filename: /var/www/html/web/modules/custom/my_migrations/config/install/migrate_plus.migration.nodes.yml
+    hash: ''
+auto_export: {  }
+_core:
+  default_config_hash: W4OGMJ9g0nIliU6O4quijGqNLQuWFixbxzi1Fytx6lk

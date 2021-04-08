@@ -1,0 +1,22 @@
+uuid: 236e2ee0-f682-4cd9-846c-0b34f1b60e95
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.page
+  module:
+    - layout_builder
+    - user
+third_party_settings:
+  layout_builder:
+    allow_custom: true
+    enabled: true
+_core:
+  default_config_hash: g1S3_GLaxq4l3I9RIca5Mlz02MxI2KmOquZpHw59akM
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content: {  }
+hidden:
+  links: true
