@@ -9,7 +9,7 @@ the main concepts covered.
 If you would like to run and poke around on this demo yourself,
 you can clone or download this repo, then:
 
-1. Run `composer install` to get all the dependencies in vendor, etc.
+1. Run `composer install` to get all the dependencies in vendor, etc. (NOTE: composer.lock assumes PHP 7.3; `composer update` may help if you are on a different version.)
 2. Import the database. If using DDEV, you can restore the snapshot provided. Otherwise, you can use the `source_data/db.sql.gz` file.
 
 You will have a single node created that is the home page, which is a basic page built using layout builder.
@@ -18,7 +18,7 @@ You will have a single node created that is the home page, which is a basic page
 
 If you're NOT using the included DDEV configuration, you may need to change the paths in the migrations from /var/www/html to whatever makes sense in your environment.
 
-The settings.ddev.php is set up for DDEV, but you can override any of it (especially $databases) with settings.local.php as you need to.
+The settings.ddev.php is set up for DDEV, but you can override any of it (especially $databases) with settings.local.php as you need to (you will need to create a settings.local.php).
 
 ## Files
 
