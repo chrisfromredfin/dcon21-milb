@@ -27,7 +27,7 @@ class MyPages extends CSV {
     $blocks = $this->fetchBlocks($row);
     foreach ($blocks as $block) {
       // See above; hardcode the 0 in so only becomes a single section.
-      // You could get more clever here if you prefered multiple sections.
+      // You could get more clever here if you wanted multiple sections.
       $components[0][] = $block;
     }
     $row->setSourceProperty('components', $components);
