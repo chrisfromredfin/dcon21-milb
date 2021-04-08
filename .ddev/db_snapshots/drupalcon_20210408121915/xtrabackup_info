@@ -1,0 +1,17 @@
+uuid = ffdf4ce8-981f-11eb-b4d7-0242ac160003
+name = 
+tool_name = mariabackup
+tool_command = --backup --target-dir=/mnt/ddev_config/db_snapshots/drupalcon_20210408121915 --user=root --password=... --socket=/var/tmp/mysql.sock
+tool_version = 10.3.28-MariaDB
+ibbackup_version = 10.3.28-MariaDB
+server_version = 10.3.28-MariaDB-1:10.3.28+maria~focal-log
+start_time = 2021-04-08 16:19:16
+end_time = 2021-04-08 16:19:20
+lock_time = 0
+binlog_pos = 
+innodb_from_lsn = 0
+innodb_to_lsn = 108937605
+partial = N
+incremental = N
+format = file
+compressed = N
