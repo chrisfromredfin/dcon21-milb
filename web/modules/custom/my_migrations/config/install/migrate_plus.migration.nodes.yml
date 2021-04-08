@@ -1,0 +1,45 @@
+# Unique ID for the migration, slug_format
+id: nodes
+# Friendly description
+label: Basic pages
+# Adding this to the group gives it inherited properties.
+migration_group: my_group
+# These should be migrated first
+migration_dependencies:
+  required:
+    - blocks
+
+# Basics about the source plugin - where to get the data,
+# what kind it is, describe the columns in the csv.
+source:
+  plugin: my_pages
+  path: "/var/www/html/source_data/nodes.csv"
+  fields:
+    0:
+      name: id
+      label: "Unique ID (nid)"
+    1:
+      name: title
+      label: Title
+  ids:
+    - id
+
+process:
+  # Title can come straight from the title field in the CSV.
+  title: title
+  # Make user 1 own everything.
+  uid:
+    plugin: default_value
+    default_value: 1
+
+  # This is the layout_builder__layout field, which stores everything!
+  layout_builder__layout:
+    # Where do we get them from? This `components` field comes from us.
+    # We use prepareRow to set it.
+    source: components
+    # We need a custom plugin to correctly map this.
+    plugin: layout_builder_sections_pages
+
+destination:
+  plugin: entity:node
+  default_bundle: page

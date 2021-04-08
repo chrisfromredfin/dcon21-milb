@@ -1,0 +1,15 @@
+type: module
+name: Migrate Source CSV
+description: 'CSV source migration.'
+package: Migration
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - drupal:migrate
+test_dependencies:
+  - migrate_plus:migrate_plus
+
+# Information added by Drupal.org packaging script on 2020-04-30
+version: '8.x-3.4'
+project: 'migrate_source_csv'
+datestamp: 1588260188

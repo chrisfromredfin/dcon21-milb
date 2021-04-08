@@ -1,0 +1,13 @@
+services:
+  config_devel.commands:
+    class: \Drupal\config_devel\Commands\ConfigDevelCommands
+    arguments:
+      - '@module_handler'
+      - '@theme_handler'
+      - '@info_parser'
+      - '@config.factory'
+      - '@config_devel.importer_exporter'
+      - '@config_devel.auto_import_subscriber'
+      - '@file_system'
+    tags:
+      - { name: drush.command }

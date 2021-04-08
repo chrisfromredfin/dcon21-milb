@@ -1,0 +1,43 @@
+# Migration for body blocks
+id: blocks
+label: Basic page bodies
+migration_group: my_group
+
+source:
+  plugin: csv
+  path: '/var/www/html/source_data/blocks.csv'
+  fields:
+    0:
+      name: entity_id
+      label: 'Entity ID'
+    1:
+      name: delta
+      label: Delta
+    2:
+      name: title
+      label: Title
+    3:
+      name: body
+      label: 'Block body'
+  ids:
+    - entity_id
+    - delta
+
+  constants:
+    default_title: "Page Body Field"
+
+process:
+  body/value: body
+  body/format:
+    plugin: default_value
+    default_value: basic_html
+
+  info: title
+
+  reusable:
+    plugin: default_value
+    default_value: 0
+
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: basic

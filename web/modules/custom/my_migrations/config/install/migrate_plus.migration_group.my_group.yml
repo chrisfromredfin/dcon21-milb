@@ -1,0 +1,30 @@
+# Basic settings
+id: my_group
+label: "CSV to LB"
+description: Custom data migrations.
+
+# Uninstall the config if the module is uninstalled.
+dependencies:
+  enforced:
+    module:
+      - my_migrations
+
+# Short description of the type of source, e.g. "Drupal 6" or "WordPress".
+source_type: "CSV Files"
+
+# Here we add any default configuration settings to be shared among all
+# migrations in the group. For this example, the source tables are in the
+# Drupal (default) database, but usually if your source data is in a
+# database it will be external.
+shared_configuration:
+  # Specifying 'source' here means that this configuration will be merged into
+  # the 'source' configuration of each migration.
+  source:
+    plugin: csv
+    # Column delimiter. Comma (,) by default.
+    delimiter: ','
+    # Field enclosure. Double quotation marks (") by default.
+    enclosure: '"'
+    # The row to be used as the CSV header (indexed from 0),
+    # or null if there is no header row.
+    header_offset: 0

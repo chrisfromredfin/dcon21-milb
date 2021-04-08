@@ -1,0 +1,25 @@
+services:
+  config_devel.importer_exporter:
+    class: Drupal\config_devel\ConfigImporterExporter
+    arguments:
+      - '@config.factory'
+      - '@config.storage'
+      - '@config.manager'
+      - '@event_dispatcher'
+      - '@lock.persistent'
+      - '@config.typed'
+      - '@module_handler'
+      - '@module_installer'
+      - '@theme_handler'
+      - '@string_translation'
+      - '@extension.list.module'
+  config_devel.writeback_subscriber:
+    class: Drupal\config_devel\EventSubscriber\ConfigDevelAutoExportSubscriber
+    arguments: ['@config.factory', '@config.manager', '@event_dispatcher']
+    tags:
+      - { name: event_subscriber }
+  config_devel.auto_import_subscriber:
+    class: Drupal\config_devel\EventSubscriber\ConfigDevelAutoImportSubscriber
+    arguments: ['@config.factory', '@config.manager']
+    tags:
+      - { name: event_subscriber }

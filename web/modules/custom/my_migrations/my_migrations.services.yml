@@ -1,0 +1,11 @@
+services:
+  migrations.row_save:
+    class: Drupal\my_migrations\EventSubscriber\RowSaveSubscriber
+    arguments: []
+    tags:
+      - { name: event_subscriber }
+  migrations.rollback:
+    class: Drupal\my_migrations\EventSubscriber\RollbackSubscriber
+    arguments: ['@database']
+    tags:
+      - { name: event_subscriber }

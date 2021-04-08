@@ -1,0 +1,14 @@
+drupal.coffee:
+  version: VERSION
+  js:
+    js/coffee.js: {}
+  css:
+    component:
+      css/coffee.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery.ui
+    - core/jquery.ui.autocomplete
