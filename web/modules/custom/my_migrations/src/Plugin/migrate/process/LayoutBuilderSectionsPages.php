@@ -26,7 +26,7 @@ class LayoutBuilderSectionsPages extends ProcessPluginBase {
     // Setup some variables we'll need:
     // - components holds all the components to be written into our section
     // - generator connects to the uuid generator service
-    // - block_to_create maps incoming data type to type of component to create.
+    // - section_list is the components from prepareRow().
     $components = [];
     $generator = \Drupal::service('uuid');
     $section_list = $row->getSourceProperty('components');
@@ -56,6 +56,7 @@ class LayoutBuilderSectionsPages extends ProcessPluginBase {
 
       // If you were doing multiple sections, you'd want this to be an array
       // somehow. @TODO figure out how to do that ;)
+      // PARAMS: $layout_id, $layout_settings, $components
       $sections = new Section('layout_onecol', [], $components);
     }
 
@@ -66,84 +67,9 @@ class LayoutBuilderSectionsPages extends ProcessPluginBase {
    * {@inheritdoc}
    */
   public function multiple() {
+    // Perhaps if multiple() returned TRUE this would help allow
+    // multiple Sections. ;)
     return FALSE;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  private function writeMigrateLogs($type, $info, $nid) {
-    $message = [];
-    // Check each item, based on type, and w.
-    foreach ($info as $delta => $value) {
-      if ($type == 'body') {
-        if ($info) {
-          $issues = _migrations_scan_for_shortcodes($value['value']);
-          if (count($issues)) {
-            $message = array_merge($message, $issues);
-          }
-        }
-      }
-
-      if ($type == 'sidebar_text') {
-        if ($info) {
-          $issues = _migrations_scan_for_shortcodes($value['value']);
-          if (count($issues)) {
-            $message = array_merge($message, $issues);
-          }
-        }
-      }
-
-      if ($type == 'bean_text') {
-        $pieces = explode(':', array_pop($value));
-        $mod = $pieces[0];
-        $bean_slug = $pieces[1];
-        if ($mod == 'view') {
-          $message = array_merge($message, ["Contains a referenced bean: $bean_slug"]);
-        }
-      }
-
-    }
-
-    if (count($message)) {
-      $values = [
-        'name' => 'Human needed for source node ' . $nid,
-        'source' => '/node/' . $nid,
-        'reason' => implode(', ', $message),
-      ];
-
-      $entity = MigrateLogEntity::create($values);
-      $entity->save();
-    }
-
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  private function fetchBlocks($type, $nid, $delta, $bean_slug) {
-    // Query the database for the correct bean or body, etc.
-    $prefix = 'migrate_map_';
-    if ($type == 'body' || $type == 'sidebar_text') {
-      $prefix .= 'page_';
-    }
-
-    $database = \Drupal::database();
-    $query = "SELECT destid1 FROM {" . $prefix . $type . "} WHERE ";
-    if ($type == 'bean_text') {
-      $query .= "sourceid2=:bean_slug";
-      $args = [':bean_slug' => $bean_slug];
-    }
-    else {
-      $query .= "sourceid1=:nid";
-      $args = [':nid' => $nid];
-    }
-    if ($type == 'sidebar_text') {
-      $query .= ' AND sourceid2=:delta';
-      $args['delta'] = $delta;
-    }
-    $result = $database->query($query, $args);
-    return $result->fetchAll();
   }
 
 }

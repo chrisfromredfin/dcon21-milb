@@ -23,9 +23,6 @@ source:
     - entity_id
     - delta
 
-  constants:
-    default_title: "Page Body Field"
-
 process:
   body/value: body
   body/format:

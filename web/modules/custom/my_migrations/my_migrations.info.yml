@@ -1,6 +1,6 @@
 name: My Migrations
 type: module
-description: Migrating into Layout Builder. DrupalCon 2021.
+description: "Migrating into Layout Builder. DrupalCon 2021."
 package: Custom
 core: 8.x
 core_version_requirement: ^8 || ^9
