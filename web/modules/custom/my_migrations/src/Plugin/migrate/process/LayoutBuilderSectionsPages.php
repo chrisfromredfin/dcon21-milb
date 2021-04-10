@@ -8,7 +8,6 @@ use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\layout_builder\Section;
 use Drupal\layout_builder\SectionComponent;
 use Drupal\block_content\Entity\BlockContent;
-use Drupal\migrations\Entity\MigrateLogEntity;
 
 /**
  * Process plugin to migrate a source field into a Layout Builder Section.
