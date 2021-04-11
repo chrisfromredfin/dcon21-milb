@@ -28,14 +28,12 @@ source:
   ids:
     - entity_id
     - delta
-  constants:
-    default_title: 'Page Body Field'
 process:
+  info: title
   body/value: body
   body/format:
     plugin: default_value
     default_value: basic_html
-  info: title
   reusable:
     plugin: default_value
     default_value: 0
