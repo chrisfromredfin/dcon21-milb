@@ -24,13 +24,16 @@ source:
     - delta
 
 process:
+  # title
+  info: title
+
+  # body
   body/value: body
   body/format:
     plugin: default_value
     default_value: basic_html
 
-  info: title
-
+  # whether or not it's reusable
   reusable:
     plugin: default_value
     default_value: 0
