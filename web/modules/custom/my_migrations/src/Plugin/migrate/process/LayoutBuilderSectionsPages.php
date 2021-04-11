@@ -25,39 +25,35 @@ class LayoutBuilderSectionsPages extends ProcessPluginBase {
     // Setup some variables we'll need:
     // - components holds all the components to be written into our section
     // - generator connects to the uuid generator service
-    // - section_list is the components from prepareRow().
     $components = [];
     $generator = \Drupal::service('uuid');
-    $section_list = $row->getSourceProperty('components');
 
-    // Since we're double nested, we need to nest foreaches...
-    foreach ($section_list as $section) {
-      foreach ($section as $its_components) {
-        $block_content = BlockContent::load($its_components->destid1);
-        if (is_null($block_content)) {
-          \Drupal::messenger()->addMessage("Could not load " . $bid->destid1 . ' ???', 'status', TRUE);
-          continue;
-        }
-
-        $config = [
-          'id' => 'inline_block:basic',
-          'label' => $block_content->label(),
-          'provider' => 'layout_builder',
-          'label_display' => FALSE,
-          'view_mode' => 'full',
-          'block_revision_id' => $block_content->getRevisionId(),
-          'block_serialized' => serialize($block_content),
-          'context_mapping' => [],
-        ];
-
-        $components[] = new SectionComponent($generator->generate(), 'content', $config);
+    foreach ($value as $section_components) {
+      $block_content = BlockContent::load($section_components->destid1);
+      if (is_null($block_content)) {
+        \Drupal::messenger()->addMessage("Could not load " . $bid->destid1 . ' ???', 'status', TRUE);
+        continue;
       }
 
-      // If you were doing multiple sections, you'd want this to be an array
-      // somehow. @TODO figure out how to do that ;)
-      // PARAMS: $layout_id, $layout_settings, $components
-      $sections = new Section('layout_onecol', [], $components);
+      $config = [
+        'id' => 'inline_block:basic',
+        'label' => $block_content->label(),
+        'provider' => 'layout_builder',
+        'label_display' => FALSE,
+        'view_mode' => 'full',
+        'block_revision_id' => $block_content->getRevisionId(),
+        'block_serialized' => serialize($block_content),
+        'context_mapping' => [],
+      ];
+
+      $components[] = new SectionComponent($generator->generate(), 'content', $config);
     }
+
+    // If you were doing multiple sections, you'd want this to be an array
+    // somehow. @TODO figure out how to do that ;)
+    // PARAMS: $layout_id, $layout_settings, $components
+    $sections = new Section('layout_onecol', [], $components);
+
 
     return $sections;
   }
