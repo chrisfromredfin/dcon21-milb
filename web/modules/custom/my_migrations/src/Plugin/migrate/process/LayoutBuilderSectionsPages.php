@@ -45,7 +45,7 @@ class LayoutBuilderSectionsPages extends ProcessPluginBase {
           'provider' => 'layout_builder',
           'label_display' => FALSE,
           'view_mode' => 'full',
-          'block_revision_id' => NULL,
+          'block_revision_id' => $block_content->getRevisionId(),
           'block_serialized' => serialize($block_content),
           'context_mapping' => [],
         ];
